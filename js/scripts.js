@@ -60,9 +60,9 @@ function listContacts(addressBookToDisplay) {
 function displayContactDetails(event){
   // console.log("The id of this <li> is " + event.target.id + ".");
   const contact = addressBook.findContact(event.target.id);
-  document.querySelector("#first-name").innerText = contact.firstName;
-  document.querySelector("#last-name").innerText = contact.lastName;
-  document.querySelector("#phone-number").innerText = contact.phoneNumber;
+  document.querySelector(".first-name").innerText = contact.firstName;
+  document.querySelector(".last-name").innerText = contact.lastName;
+  document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
 }
@@ -82,7 +82,9 @@ function handleFormSubmission(event) {
   let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
   addressBook.addContact(newContact);
   listContacts(addressBook);
-  // displayContactDetails();
+  document.querySelector("input#new-first-name").value = null;
+  document.querySelector("input#new-last-name").value = null;
+  document.querySelector("input#new-phone-number").value = null;
 }
 
 window.addEventListener("load", function (){
