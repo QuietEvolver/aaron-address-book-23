@@ -100,6 +100,11 @@ function displayContactDetails(event){
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector(".email").innerText = contact.emailAddress;
+  // street addresses
+  document.querySelector(".street-address").innerText = contact.newAddress.streetAddress;
+  document.querySelector(".city").innerText = contact.newAddress.city;
+  document.querySelector(".state").innerText = contact.newAddress.state;
+  document.querySelector(".zipCode").innerText = contact.newAddress.zipCode;
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
 }
