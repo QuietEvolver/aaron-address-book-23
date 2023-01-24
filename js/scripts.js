@@ -65,16 +65,15 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 };
 
-function Address(streetAddress, city, state, zipCode) {
-  this.streetAddress = streetAddress;
+function StreetAddress(houseAddress, city, state, zipCode) {
+  this.houseAddress = houseAddress;
   this.city = city;
   this.state = state;
   this.zipCode = zipCode;
 }
 
-
-Address.prototype.fullAddress = function() {
-  return this.streetAddress + " " + this.city + " " + this.state + " " + this.zipCode;
+StreetAddress.prototype.fullAddress = function() {
+  return this.houseAddress + " " + this.city + " " + this.state + " " + this.zipCode;
 };
 // User Interface Logic ---------
 let addressBook = new AddressBook();
@@ -101,21 +100,22 @@ function displayContactDetails(event){
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector(".email").innerText = contact.emailAddress;
   // street addresses
-  document.querySelector(".street-address").innerText = contact.newAddress.streetAddress;
+  document.querySelector(".house-address").innerText = contact.newAddress.houseAddress;
   document.querySelector(".city").innerText = contact.newAddress.city;
   document.querySelector(".state").innerText = contact.newAddress.state;
   document.querySelector(".zipCode").innerText = contact.newAddress.zipCode;
+  document.querySelector("button.update").setAttribute("id", contact.id);
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
 }
 
-function handleUpdate(event){
+function handleUpdate(event){ /// TBD: StreetAddress to be added
   // const contact = 
   addressBook.updateContact(event.target.id);
-  const editedFirstName = document.querySelector("input.new-first-name").value;
-  const editedLastName = document.querySelector("input.new-last-name").value;
-  const editedPhoneNumber = document.querySelector("input.new-phone-number").value;
-  const editedEmail = document.querySelector("input.email").value;
+  const editedFirstName = document.querySelector("input#new-first-name").value;
+  const editedLastName = document.querySelector("input#new-last-name").value;
+  const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
+  const editedEmail = document.querySelector("input#new-email").value;
   // call instance on the parent constructor
   addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
   let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
@@ -142,12 +142,12 @@ function handleFormSubmission(event) {
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const inputtedEmail = document.querySelector("input#new-email").value;
   // street addresses
-  const inputtedStreetAddress = document.querySelector("input#new-street-address").value;
+  const inputtedStreetAddress = document.querySelector("input#new-house-address").value;
   const inputtedCity = document.querySelector("input#new-city").value;
   const inputtedState = document.querySelector("input#new-state").value;
   const inputtedZipCode = document.querySelector("input#new-zipCode").value;
 
-  let newAddress = new Address(inputtedStreetAddress, inputtedCity, inputtedState, inputtedZipCode);
+  let newAddress = new StreetAddress(inputtedStreetAddress, inputtedCity, inputtedState, inputtedZipCode);
   let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, newAddress);
   console.log("new contact: ", newContact);  
 
@@ -161,7 +161,7 @@ function handleFormSubmission(event) {
   document.querySelector("input#new-phone-number").value = null;
   document.querySelector("input#new-email").value = null;
 // assign input fields to null to trigger on submit
-  document.querySelector("input#new-street-address").value = null;
+  document.querySelector("input#new-house-address").value = null;
   document.querySelector("input#new-city").value = null;
   document.querySelector("input#new-state").value = null;
   document.querySelector("input#new-zipCode").value = null;
