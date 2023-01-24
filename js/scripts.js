@@ -95,6 +95,7 @@ function handleUpdate(event){
   addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
   let cl = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
   console.log("address edit? ", cl);
+  listContacts(addressBook);
 }
 // Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname
 
