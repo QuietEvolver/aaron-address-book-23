@@ -22,7 +22,7 @@ AddressBook.prototype.findContact = function(id) {
 };
 
 //update ? 
-AddressBook.prototype.udpateContact = function(id){ 
+AddressBook.prototype.updateContact = function(id){ 
   if(this.contacts[id] !== undefined){
     console.log("update.proto.id ", contacts[id]);
     // console.log("this.contacts[id] ", this.contacts[id]);
@@ -30,10 +30,14 @@ AddressBook.prototype.udpateContact = function(id){
     this.contacts[id].lastName = editedLastName;
     this.contacts[id].phoneNumber = editedPhoneNumber;
     // this.contacts[id] = contact;
-  
   }
    return false;
 }
+// Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname"
+
+// She referenced using the .findContact method as a good place to start.
+
+// Which seems like a good example to start from (changing the name from .findContact to .Update) because you need to be able to find the correct contact before you can update any information. I am not sure how the lessons are suggestion you use Contact prototype but since this.contacts is part of the AddressBook prototype I would start there"
 
 AddressBook.prototype.deleteContact = function(id) {
   if (this.contacts[id] === undefined) {
@@ -82,7 +86,8 @@ function displayContactDetails(event){
 }
 
 function handleUpdate(event){
-  const contact = addressBook.udpateContact(event.target.id);
+  // const contact = 
+  addressBook.udpateContact(event.target.id);
   const editedFirstName = document.querySelector("input#new-first-name").value;
   const editedLastName = document.querySelector("input#new-last-name").value;
   const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
@@ -91,6 +96,12 @@ function handleUpdate(event){
   let cl = addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
   console.log("address edit? ", cl);
 }
+// Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname
+
+// She referenced using the .findContact method as a good place to start.
+
+// Which seems like a good example to start from (changing the name from .findContact to .Update) because you need to be able to find the correct contact before you can update any information. I am not sure how the lessons are suggestion you use Contact prototype but since this.contacts is part of the AddressBook prototype I would start there"
+
 function handleDelete(event) {
   addressBook.deleteContact(event.target.id);
   document.querySelector("button.delete").removeAttribute("id");
