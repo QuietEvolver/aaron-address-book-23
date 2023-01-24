@@ -64,6 +64,16 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 };
 
+function Address(streetAddress, city, state, zipCode) {
+  this.streetAddress = streetAddress;
+  this.city = city;
+  this.state = state;
+  this.zipCode = zipCode;
+}
+
+Address.prototype.fullAddress = function() {
+  return this.streetAddress + " " + this.city + " " + this.state + " " + this.zipCode;
+};
 // User Interface Logic ---------
 let addressBook = new AddressBook();
 
