@@ -48,10 +48,11 @@ AddressBook.prototype.deleteContact = function(id) {
 };
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, emailAddress) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.emailAddress = emailAddress;
 }
 
 Contact.prototype.fullName = function() {
@@ -81,7 +82,7 @@ function displayContactDetails(event){
   document.querySelector(".first-name").innerText = contact.firstName;
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
-  document.querySelector(".email").innerText = contact.newEmail;
+  document.querySelector(".email").innerText = contact.emailAddress;
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
 }
