@@ -87,13 +87,13 @@ function displayContactDetails(event){
 
 function handleUpdate(event){
   // const contact = 
-  addressBook.udpateContact(event.target.id);
+  addressBook.updateContact(event.target.id);
   const editedFirstName = document.querySelector("input#new-first-name").value;
   const editedLastName = document.querySelector("input#new-last-name").value;
   const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
   // call instance on the parent constructor
-  addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
-  let cl = addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
+  addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
+  let cl = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
   console.log("address edit? ", cl);
 }
 // Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname
