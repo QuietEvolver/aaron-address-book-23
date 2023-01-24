@@ -21,6 +21,20 @@ AddressBook.prototype.findContact = function(id) {
   return false;
 };
 
+//update ? 
+AddressBook.prototype.udpateContact = function(id){ 
+  if(this.contacts[id] !== undefined){
+    // console.log("update.proto.id ", contacts[id]);
+    // console.log("this.contacts[id] ", this.contacts[id]);
+    this.contacts[id].firstName = editedFirstName;
+    this.contacts[id].lastName = editedLastName;
+    this.contacts[id].phoneNumber = editedPhoneNumber;
+    // this.contacts[id] = contact;
+  
+  }
+   return false;
+}
+
 AddressBook.prototype.deleteContact = function(id) {
   if (this.contacts[id] === undefined) {
     return false;
@@ -67,6 +81,16 @@ function displayContactDetails(event){
   document.querySelector("div#contact-details").removeAttribute("class");
 }
 
+function handleUpdate(event){
+  const contact = addressBook.udpateContact(event.target.id);
+  const editedFirstName = document.querySelector("input#new-first-name").value;
+  const editedLastName = document.querySelector("input#new-last-name").value;
+  const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
+  // call instance on the parent constructor
+  addressBook.udpateContact(event, editedFirstName, editedLastName, editedPhoneNumber);
+  let cl = addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
+  console.log("address edit? ", cl);
+}
 function handleDelete(event) {
   addressBook.deleteContact(event.target.id);
   document.querySelector("button.delete").removeAttribute("id");
@@ -90,5 +114,6 @@ function handleFormSubmission(event) {
 window.addEventListener("load", function (){
   document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
   document.querySelector("div#contacts").addEventListener("click", displayContactDetails);
+  document.querySelector("button.update").addEventListener("click", handleUpdate);
   document.querySelector("button.delete").addEventListener("click", handleDelete);
 });
