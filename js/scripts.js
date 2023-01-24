@@ -24,7 +24,7 @@ AddressBook.prototype.findContact = function(id) {
 //update ? 
 AddressBook.prototype.udpateContact = function(id){ 
   if(this.contacts[id] !== undefined){
-    // console.log("update.proto.id ", contacts[id]);
+    console.log("update.proto.id ", contacts[id]);
     // console.log("this.contacts[id] ", this.contacts[id]);
     this.contacts[id].firstName = editedFirstName;
     this.contacts[id].lastName = editedLastName;
@@ -87,7 +87,7 @@ function handleUpdate(event){
   const editedLastName = document.querySelector("input#new-last-name").value;
   const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
   // call instance on the parent constructor
-  addressBook.udpateContact(event, editedFirstName, editedLastName, editedPhoneNumber);
+  addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
   let cl = addressBook.udpateContact(editedFirstName, editedLastName, editedPhoneNumber);
   console.log("address edit? ", cl);
 }
