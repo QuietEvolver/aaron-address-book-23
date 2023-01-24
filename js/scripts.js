@@ -53,11 +53,12 @@ AddressBook.prototype.deleteContact = function(id) {
 };
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber, emailAddress) {
+function Contact(firstName, lastName, phoneNumber, emailAddress, newAddress) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
   this.emailAddress = emailAddress;
+  this.newAddress = newAddress;
 }
 
 Contact.prototype.fullName = function() {
@@ -70,6 +71,7 @@ function Address(streetAddress, city, state, zipCode) {
   this.state = state;
   this.zipCode = zipCode;
 }
+
 
 Address.prototype.fullAddress = function() {
   return this.streetAddress + " " + this.city + " " + this.state + " " + this.zipCode;
@@ -111,8 +113,8 @@ function handleUpdate(event){
   const editedEmail = document.querySelector("input.email").value;
   // call instance on the parent constructor
   addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
-  let cl = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
-  console.log("address edit? ", cl);
+  let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+  console.log("address edit? ", consoleLogging);
   listContacts(addressBook);
 }
 // Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname
@@ -134,13 +136,30 @@ function handleFormSubmission(event) {
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const inputtedEmail = document.querySelector("input#new-email").value;
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail);
+  // street addresses
+  const inputtedStreetAddress = document.querySelector("input#new-street-address").value;
+  const inputtedCity = document.querySelector("input#new-city").value;
+  const inputtedState = document.querySelector("input#new-state").value;
+  const inputtedZipCode = document.querySelector("input#new-zipCode").value;
+
+  let newAddress = new Address(inputtedStreetAddress, inputtedCity, inputtedState, inputtedZipCode);
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, newAddress);
+  console.log("new contact: ", newContact);  
+
   addressBook.addContact(newContact);
+  // addAddress prototype fxn to Contact by [id] == added as as 
+  
+
   listContacts(addressBook);
   document.querySelector("input#new-first-name").value = null;
   document.querySelector("input#new-last-name").value = null;
   document.querySelector("input#new-phone-number").value = null;
   document.querySelector("input#new-email").value = null;
+// assign input fields to null to trigger on submit
+  document.querySelector("input#new-street-address").value = null;
+  document.querySelector("input#new-city").value = null;
+  document.querySelector("input#new-state").value = null;
+  document.querySelector("input#new-zipCode").value = null;
 }
 
 window.addEventListener("load", function (){
