@@ -21,24 +21,29 @@ AddressBook.prototype.findContact = function(id) {
   return false;
 };
 
-//update ? 
-AddressBook.prototype.updateContact = function(id){ 
-  if(this.contacts[id] !== undefined){
-    console.log("update.proto.id ", contacts[id]);
-    // console.log("this.contacts[id] ", this.contacts[id]);
-    this.contacts[id].firstName = editedFirstName;
-    this.contacts[id].lastName = editedLastName;
-    this.contacts[id].phoneNumber = editedPhoneNumber;
-    // this.contacts[id] = contact;
-  }
-   return false;
-}
 // Cathy's Suggested Course of Action: "You will need to create a way to target a contact (such as addressBook.contacts[1] and then update the property that is desired like addressBook.contacts[1].firstName = "newname"
 
 // She referenced using the .findContact method as a good place to start.
 
 // Which seems like a good example to start from (changing the name from .findContact to .Update) because you need to be able to find the correct contact before you can update any information. I am not sure how the lessons are suggestion you use Contact prototype but since this.contacts is part of the AddressBook prototype I would start there"
 
+//update ? // WIP: 
+/* update: addressBook.contacts[id]:  undefined
+scripts.js:94 Uncaught TypeError: Cannot read properties of null (reading 'value')
+  at HTMLButtonElement.handleUpdate (scripts.js:94:73) 
+*/
+AddressBook.prototype.updateContact = function(id){ 
+    // let contact = this.contacts[id]; 
+    console.log("update: addressBook.contacts[id]: ", addressBook.contacts[id]);
+    if(this.contact !== undefined){
+    // console.log("this.contacts[id] ", this.contacts[id]);
+    this.contacts[id].firstName = editedFirstName;
+    this.contacts[id].lastName = editedLastName;
+    this.contacts[id].phoneNumber = editedPhoneNumber;
+    this.contacts[id].editedEmail = editedEmail;
+  }
+  return false;
+}
 AddressBook.prototype.deleteContact = function(id) {
   if (this.contacts[id] === undefined) {
     return false;
@@ -90,12 +95,13 @@ function displayContactDetails(event){
 function handleUpdate(event){
   // const contact = 
   addressBook.updateContact(event.target.id);
-  const editedFirstName = document.querySelector("input#new-first-name").value;
-  const editedLastName = document.querySelector("input#new-last-name").value;
-  const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
+  const editedFirstName = document.querySelector("input.new-first-name").value;
+  const editedLastName = document.querySelector("input.new-last-name").value;
+  const editedPhoneNumber = document.querySelector("input.new-phone-number").value;
+  const editedEmail = document.querySelector("input.email").value;
   // call instance on the parent constructor
-  addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
-  let cl = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber);
+  addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+  let cl = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
   console.log("address edit? ", cl);
   listContacts(addressBook);
 }
@@ -117,14 +123,14 @@ function handleFormSubmission(event) {
   const inputtedFirstName = document.querySelector("input#new-first-name").value;
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
-  const inputtedNewEmail = document.querySelector("input#newEmail").value;
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedNewEmail);
+  const inputtedEmail = document.querySelector("input#new-email").value;
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail);
   addressBook.addContact(newContact);
   listContacts(addressBook);
   document.querySelector("input#new-first-name").value = null;
   document.querySelector("input#new-last-name").value = null;
   document.querySelector("input#new-phone-number").value = null;
-  document.querySelector("input#newEmail").value = null;
+  document.querySelector("input#new-email").value = null;
 }
 
 window.addEventListener("load", function (){
