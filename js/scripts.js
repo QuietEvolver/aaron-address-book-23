@@ -32,15 +32,19 @@ AddressBook.prototype.findContact = function(id) {
 scripts.js:94 Uncaught TypeError: Cannot read properties of null (reading 'value')
   at HTMLButtonElement.handleUpdate (scripts.js:94:73) 
 */
-AddressBook.prototype.updateContact = function(id){ 
-    // let contact = this.contacts[id]; 
-    console.log("update: addressBook.contacts[id]: ", addressBook.contacts[id]);
-    if(this.contact !== undefined){
-    // console.log("this.contacts[id] ", this.contacts[id]);
+AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail){ 
+  // Contact.prototype.updateContact = function(id){ 
+
+    console.log("update: [id]: ", id);
+    console.log("update:  this.contacts: ", this.contacts);
+  if(this.contacts[id] !== undefined){
     this.contacts[id].firstName = editedFirstName;
     this.contacts[id].lastName = editedLastName;
+    // addressBook.contacts[id].lastName.value = editedLastName;
+    console.log("edited ln ", editedLastName);
     this.contacts[id].phoneNumber = editedPhoneNumber;
     this.contacts[id].editedEmail = editedEmail;
+    // let sreetAddress = StreetAddress(editedFirstName, )
   }
   return false;
 }
@@ -76,7 +80,7 @@ StreetAddress.prototype.fullAddress = function() {
   return this.houseAddress + " " + this.city + " " + this.state + " " + this.zipCode;
 };
 // User Interface Logic ---------
-let addressBook = new AddressBook();
+let addressBook = new AddressBook(); // mock DB
 
 function listContacts(addressBookToDisplay) {
   let contactsDiv = document.querySelector("div#contacts");
@@ -94,6 +98,7 @@ function listContacts(addressBookToDisplay) {
 
 function displayContactDetails(event){
   // console.log("The id of this <li> is " + event.target.id + ".");
+
   const contact = addressBook.findContact(event.target.id);
   document.querySelector(".first-name").innerText = contact.firstName;
   document.querySelector(".last-name").innerText = contact.lastName;
@@ -107,17 +112,32 @@ function displayContactDetails(event){
   document.querySelector("button.update").setAttribute("id", contact.id);
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
+
+  /* // update contactfor update?? asmr
+  testContact.updateContact (this.phoneNumber, “888-888-8888”)
+[2:43 PM]
+contact.prototype.updateContact = function(firstName, lastName, phoneNumber)
+[2:44 PM]
+Contact.updateContact(phoneNumber, “888-888-8888”)
+[2:44 PM]
+Contact.updateContact(phoneNumber, “888-888-8888”) */
 }
 
 function handleUpdate(event){ /// TBD: StreetAddress to be added
+  let id = event.target.id;
+  console.log("e.id ", id);
   // const contact = 
-  addressBook.updateContact(event.target.id);
+  // addressBook.updateContact(event.target.id);  caled w/ params on line 137
+  // contact.updateContact(event.target.id);
   const editedFirstName = document.querySelector("input#new-first-name").value;
   const editedLastName = document.querySelector("input#new-last-name").value;
   const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const editedEmail = document.querySelector("input#new-email").value;
   // call instance on the parent constructor
-  addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+
+  addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+  // similar to contactDetails() updating 103-114
+  displayContactDetails(event); // passing id through event
   let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
   console.log("address edit? ", consoleLogging);
   listContacts(addressBook);
@@ -149,7 +169,7 @@ function handleFormSubmission(event) {
 
   let newAddress = new StreetAddress(inputtedStreetAddress, inputtedCity, inputtedState, inputtedZipCode);
   let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmail, newAddress);
-  console.log("new contact: ", newContact);  
+  // console.log("new contact: ", newContact);  
 
   addressBook.addContact(newContact);
   // addAddress prototype fxn to Contact by [id] == added as as 
