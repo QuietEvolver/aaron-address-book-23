@@ -131,7 +131,7 @@ function handleUpdate(event){ /// TBD: StreetAddress to be added
   // call instance on the parent constructor
   const state = document.querySelector("input#new-state").value;
   const zipCode = document.querySelector("input#new-zipCode").value;
-  addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state);//
+  addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state, zipCode);//
   // similar to contactDetails() updating 103-114
   displayContactDetails(event); // passing id through event
   let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state);
