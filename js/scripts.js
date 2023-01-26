@@ -45,6 +45,7 @@ AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastNa
     this.contacts[id].houseAddress = houseAddress;
     this.contacts[id].city = city;
     this.contacts[id].state = state;
+    this.contacts[id].zipCode = zipCode;
   }
   return false;
 }
