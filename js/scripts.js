@@ -113,14 +113,6 @@ function displayContactDetails(event){
   document.querySelector("button.delete").setAttribute("id", contact.id);
   document.querySelector("div#contact-details").removeAttribute("class");
 
-  /* // update contactfor update?? asmr
-  testContact.updateContact (this.phoneNumber, “888-888-8888”)
-[2:43 PM]
-contact.prototype.updateContact = function(firstName, lastName, phoneNumber)
-[2:44 PM]
-Contact.updateContact(phoneNumber, “888-888-8888”)
-[2:44 PM]
-Contact.updateContact(phoneNumber, “888-888-8888”) */
 }
 
 function handleUpdate(event){ /// TBD: StreetAddress to be added
@@ -138,6 +130,7 @@ function handleUpdate(event){ /// TBD: StreetAddress to be added
   const city = document.querySelector("input#new-city").value;
   // call instance on the parent constructor
   const state = document.querySelector("input#new-state").value;
+  const zipCode = document.querySelector("input#new-zipCode").value;
   addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state);//
   // similar to contactDetails() updating 103-114
   displayContactDetails(event); // passing id through event
