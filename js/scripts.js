@@ -32,7 +32,7 @@ AddressBook.prototype.findContact = function(id) {
 scripts.js:94 Uncaught TypeError: Cannot read properties of null (reading 'value')
   at HTMLButtonElement.handleUpdate (scripts.js:94:73) 
 */
-AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state){ 
+AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state, zipCode){ 
     console.log("update: [id]: ", id);
     console.log("update:  this.contacts: ", this.contacts);
   if(this.contacts[id] !== undefined){
