@@ -32,19 +32,19 @@ AddressBook.prototype.findContact = function(id) {
 scripts.js:94 Uncaught TypeError: Cannot read properties of null (reading 'value')
   at HTMLButtonElement.handleUpdate (scripts.js:94:73) 
 */
-AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail){ 
-  // Contact.prototype.updateContact = function(id){ 
-
+AddressBook.prototype.updateContact = function(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state){ 
     console.log("update: [id]: ", id);
     console.log("update:  this.contacts: ", this.contacts);
   if(this.contacts[id] !== undefined){
     this.contacts[id].firstName = editedFirstName;
     this.contacts[id].lastName = editedLastName;
-    // addressBook.contacts[id].lastName.value = editedLastName;
-    console.log("edited ln ", editedLastName);
+    console.log("editedLastName ", editedLastName);
     this.contacts[id].phoneNumber = editedPhoneNumber;
     this.contacts[id].editedEmail = editedEmail;
-    // let sreetAddress = StreetAddress(editedFirstName, )
+    // 
+    this.contacts[id].houseAddress = houseAddress;
+    this.contacts[id].city = city;
+    this.contacts[id].state = state;
   }
   return false;
 }
@@ -133,12 +133,15 @@ function handleUpdate(event){ /// TBD: StreetAddress to be added
   const editedLastName = document.querySelector("input#new-last-name").value;
   const editedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const editedEmail = document.querySelector("input#new-email").value;
+  // house
+  const houseAddress = document.querySelector("input#new-house-address").value;
+  const city = document.querySelector("input#new-city").value;
   // call instance on the parent constructor
-
-  addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+  const state = document.querySelector("input#new-state").value;
+  addressBook.updateContact(id, editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state);//
   // similar to contactDetails() updating 103-114
   displayContactDetails(event); // passing id through event
-  let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail);
+  let consoleLogging = addressBook.updateContact(editedFirstName, editedLastName, editedPhoneNumber, editedEmail, houseAddress, city, state);
   console.log("address edit? ", consoleLogging);
   listContacts(addressBook);
 }
